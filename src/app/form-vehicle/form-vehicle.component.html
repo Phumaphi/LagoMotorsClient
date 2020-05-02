@@ -1,0 +1,20 @@
+<h4 class="padinClass">New Vehicle</h4>
+<form [formGroup]="form" class="example-container padinClass">
+ 
+  <mat-form-field appearance="fill">
+    <mat-label>Make</mat-label>
+       <mat-select
+        (selectionChange)="onMakeChange()" [(ngModel)]="makes" formControlName="make"> 
+      <mat-option *ngFor="let item of vehicle" value="{{item.id}}">{{item.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Model</mat-label>
+    <mat-select formControlName="models">
+      <mat-option *ngFor="let m of models"value="{{m.id}}">{{m.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>
+<button mat-button class="mat-raised-button mat-primary padinClass" (click)="save()"[disabled]="!form.valid">Save</button>

@@ -1,0 +1,42 @@
+
+   
+ img{
+    max-width: height 90px;
+    width: 53px;
+    background-color: whitesmoke;
+    background-blend-mode: soft-light;
+    border-radius: 100%;
+    border: unset;
+  } 
+  .header-toolbar{
+    background-color:#78b53f;
+    color: white;
+    width: 100%;
+  }
+   
+  .mat-icon svg {
+  height: 24px;
+  width: 24px;
+  } 
+  .navbar-spacer{
+  float: right;
+  margin-left: 200px;
+  }
+  .navbar-tabs{
+  text-decoration:white;
+  }
+  .mat-tab-link{
+  color :white;
+  }
+  /*footer*/
+  
+  .footer{
+    bottom: 0;
+    position:fixed;
+    left:0;
+    right:0;
+    height: 40px;
+    color: white;
+    font-size: 12px;
+    background-color:#78b53f;
+  }

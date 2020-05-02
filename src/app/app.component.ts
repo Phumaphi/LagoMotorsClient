@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'LagoMotorsClient';
+  navLinks = [
+    { path: 'newVehicleForm', label: 'Add_Vehicle' }
+
+  ];
+  get fullyear(): number {
+    const footerDate = new Date();
+    const year = footerDate.getFullYear();
+    return year;
+  }
 }
