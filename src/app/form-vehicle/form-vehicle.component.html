@@ -1,10 +1,9 @@
 <h4 class="padinClass">New Vehicle</h4>
-<form [formGroup]="form" class="example-container padinClass">
- 
+<!-- <form [formGroup]="form" class="example-container padinClass   "> -->
+<form [formGroup]="form" class="example-form">
   <mat-form-field appearance="fill">
     <mat-label>Make</mat-label>
-       <mat-select
-        (selectionChange)="onMakeChange()" [(ngModel)]="makes" formControlName="make"> 
+    <mat-select (selectionChange)="onMakeChange()" [(ngModel)]="makes" formControlName="make">
       <mat-option *ngFor="let item of vehicle" value="{{item.id}}">{{item.name}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -12,9 +11,35 @@
   <mat-form-field appearance="fill">
     <mat-label>Model</mat-label>
     <mat-select formControlName="models">
-      <mat-option *ngFor="let m of models"value="{{m.id}}">{{m.name}}</mat-option>
+      <mat-option *ngFor="let m of models" value="{{m.id}}">{{m.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-
+  <p>Is this vehicle registered?</p>
+  <mat-radio-group
+  aria-labelledby="example-radio-group-label" class="example-radio-group">
+  <mat-radio-button value="true" id="registered">Yes</mat-radio-button>
+  <mat-radio-button value="false" id="notRegistered">No</mat-radio-button>
+</mat-radio-group>
+  <h2>Features</h2>
+  <section *ngFor="let item of fetures">
+    <mat-checkbox [value]="item">{{item.name}}</mat-checkbox>
+  </section>
+<h2>Contact</h2>
+  
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Name" formControlName="Name">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <span matPrefix>+27 &nbsp;</span>
+      <input type="tel" matInput placeholder="Telephone">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field></td>
+    <td> <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" formControlName="email" [errorStateMatcher]="matcher">
+    </mat-form-field></td>
+  </tr></table>
+ 
 </form>
-<button mat-button class="mat-raised-button mat-primary padinClass" (click)="save()"[disabled]="!form.valid">Save</button>
+<button mat-button class="mat-raised-button mat-primary padinClass" (click)="save()"
+[disabled]="!form.valid">Save</button>

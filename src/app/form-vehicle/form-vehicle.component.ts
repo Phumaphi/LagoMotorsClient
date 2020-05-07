@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../interface/vehicle';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { VehicleService } from '../services/vehicle.service';
+import { MyErrorStateMatcher } from 'src/MyErrorStateMatcher';
 
 @Component({
   selector: 'app-form-vehicle',
@@ -19,25 +20,35 @@ export class FormVehicleComponent implements OnInit {
   vehicle: Vehicle[];
   makes: string;
   models = new Array();
+  fetures: any[];
+  matcher = new MyErrorStateMatcher();
+
 
   ngOnInit() {
     this.buildForm();
+    this.getFeature();
     this.getVehicleMake();
   }
+  buildForm() {
+    this.form = new FormGroup({
+      make: new FormControl('', Validators.required),
+      models: new FormControl('', Validators.required),
+      Name: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email, ])
+     });
+    }
+
   getVehicleMake() {
     this.vehicleServ.getVehicles().subscribe( res => {
       this.vehicle = res;
     });
   }
-
-  buildForm() {
-    this.form = this.fb.group({
-      make: ['', Validators.required],
-      // name = new FormControl('');
-      models: ['', Validators.required],
+  getFeature() {
+    this.vehicleServ.getFeatures().subscribe( res => {
+      this.fetures = res;
     });
   }
-  onMakeChange() {
+onMakeChange() {
     const vehicleId = Number(this.makes);
     const selectedMaker = this.vehicle.filter(v => v.id === vehicleId).map(m => m.models);
     for (const i of selectedMaker) {
