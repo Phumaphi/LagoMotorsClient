@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Vehicle } from '../interface/vehicle';
 import { Feature } from '../interface/Feature';
@@ -10,12 +10,25 @@ import { tap, map } from 'rxjs/operators';
 })
 export class VehicleService {
 
+
+
+
   private baseUri = 'http://localhost:5000/api';
 
 
   constructor(private http: HttpClient) {
   }
 
+
+  createVehicle(entry: any) {
+    debugger;
+    return this.http.post(this.baseUri.concat('/vehicles'), entry)
+    .pipe(tap(data => {
+          debugger;
+          map(res => res);
+          console.log(JSON.stringify(data));
+    }));
+  }
   getVehicles(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(this.baseUri.concat('/makes'));
   }
