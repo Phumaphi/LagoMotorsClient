@@ -1,43 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Vehicle } from '../interface/vehicle';
 import { Feature } from '../interface/Feature';
-import { tap, map } from 'rxjs/operators';
+import { ErrorTracker } from './../interface/ErrorTracker';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
 
-
-
-
   private baseUri = 'http://localhost:5000/api';
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
+  createVehicle(vehicle: Vehicle): Observable<Vehicle | ErrorTracker> {
+
+    return this.http.post<Vehicle>(this.baseUri.concat('/vehicles'), vehicle);
   }
 
-
-  createVehicle(entry: any) {
-    debugger;
-    return this.http.post(this.baseUri.concat('/vehicles'), entry)
-    .pipe(tap(data => {
-          debugger;
-          map(res => res);
-          console.log(JSON.stringify(data));
-    }));
-  }
   getVehicles(): Observable<Vehicle[]> {
+
     return this.http.get<Vehicle[]>(this.baseUri.concat('/makes'));
   }
 
   getFeatures(): Observable<Feature[]> {
-    return this.http.get<Feature[]>(this.baseUri.concat('/features'))
-    .pipe(tap(data => {
-      map(res => res);
-      console.log(JSON.stringify(data));
-    } ));
+
+    return this.http.get<Feature[]>(this.baseUri.concat('/features'));
   }
 }
+

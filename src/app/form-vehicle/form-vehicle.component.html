@@ -9,7 +9,7 @@
   <br>
   <mat-form-field appearance="fill">
     <mat-label>Model</mat-label>
-    <mat-select formControlName="ModelId" [(ngModel)]="ModelId" name="ModelId">
+    <mat-select formControlName="modelId" [(ngModel)]="modelId" name="modelId">
       <mat-option *ngFor="let m of models" value="{{m.id}}">{{m.name}}</mat-option>
     </mat-select>
   </mat-form-field>
